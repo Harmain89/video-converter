@@ -1,0 +1,14 @@
+{
+  "name": "smart-video-converter",
+  "version": "1.0.0",
+  "description": "Local video converter with a smart remux/QSV engine (Node UI + Python/FFmpeg backend)",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "ws": "^8.18.0"
+  }
+}

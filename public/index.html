@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Smart Video Converter</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="bg"></div>
+
+  <main class="card">
+    <header class="head">
+      <div class="logo">
+        <svg viewBox="0 0 24 24" width="30" height="30" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <!-- conversion ring -->
+          <path d="M4.5 12a7.5 7.5 0 0 1 12.4-5.7" stroke="#fff" stroke-width="1.9" stroke-linecap="round"/>
+          <path d="M19.5 12a7.5 7.5 0 0 1-12.4 5.7" stroke="#fff" stroke-width="1.9" stroke-linecap="round"/>
+          <path d="M17.2 2.6v3.9h-3.9" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M6.8 21.4v-3.9h3.9" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+          <!-- play head -->
+          <path d="M10.2 9.1v5.8l5-2.9-5-2.9z" fill="#fff"/>
+        </svg>
+      </div>
+      <div>
+        <h1>Smart Video Converter</h1>
+        <p class="sub">Local &amp; lossless — no uploads, hardware-accelerated</p>
+      </div>
+    </header>
+
+    <!-- Step 1: pick a file from disk -->
+    <section class="panel">
+      <div class="panel-head">
+        <span class="step">1</span><h2>Choose a video</h2>
+      </div>
+      <div class="browser">
+        <div class="crumb" id="crumb">
+          <button id="drivesBtn" class="ghost" title="Drives / Home">🏠</button>
+          <button id="upBtn" class="ghost" title="Up one folder">↑ Up</button>
+          <span id="crumbPath">~</span>
+        </div>
+        <ul id="fileList" class="files"><li class="muted">Loading…</li></ul>
+      </div>
+    </section>
+
+    <!-- Step 2: selected file + analysis -->
+    <section class="panel hidden" id="selectedPanel">
+      <div class="panel-head">
+        <span class="step">2</span><h2>Selected file</h2>
+      </div>
+      <div class="selected">
+        <div class="filemeta">
+          <div class="fname" id="selName">—</div>
+          <div class="finfo" id="selInfo">—</div>
+        </div>
+        <div class="badge" id="planBadge">analyzing…</div>
+      </div>
+    </section>
+
+    <!-- Step 3: options -->
+    <section class="panel hidden" id="optionsPanel">
+      <div class="panel-head">
+        <span class="step">3</span><h2>Output options</h2>
+      </div>
+      <div class="options">
+        <label class="opt">
+          <span>Container</span>
+          <select id="format">
+            <option value="mp4" selected>MP4 (plays everywhere)</option>
+            <option value="mkv">MKV (keeps everything)</option>
+          </select>
+        </label>
+        <label class="opt" id="modeOpt">
+          <span>Mode</span>
+          <select id="mode">
+            <option value="auto" selected>Auto (smart — fastest)</option>
+            <option value="transcode">Force re-encode</option>
+          </select>
+        </label>
+        <label class="opt encode-only">
+          <span>Codec</span>
+          <select id="codec">
+            <option value="h264" selected>H.264 (compatible)</option>
+            <option value="h265">H.265 (smaller)</option>
+          </select>
+        </label>
+        <label class="opt encode-only">
+          <span>Quality</span>
+          <select id="quality">
+            <option value="high">High</option>
+            <option value="balanced" selected>Balanced</option>
+            <option value="small">Small file</option>
+          </select>
+        </label>
+      </div>
+      <button id="convertBtn" class="primary">Convert →</button>
+    </section>
+
+    <!-- Step 4: progress -->
+    <section class="panel hidden" id="progressPanel">
+      <div class="panel-head">
+        <span class="step">4</span><h2 id="progTitle">Converting…</h2>
+      </div>
+      <div class="progwrap">
+        <div class="bar"><div class="fill" id="fill"></div></div>
+        <div class="stats">
+          <span id="pct">0%</span>
+          <span id="speed"></span>
+          <span id="eta"></span>
+        </div>
+      </div>
+      <div class="result hidden" id="result"></div>
+      <div class="logline" id="logline"></div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
