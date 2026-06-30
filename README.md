@@ -26,23 +26,66 @@ No uploads. No quality loss. Hardware-accelerated.
 
 ## 📖 Overview
 
-Ever downloaded a movie that **only plays in VLC** and refuses to open in your phone, TV, or
-the default player? The culprit is almost always the **container** (e.g. `.mkv`), not the video
-itself — the codecs inside are usually fine.
+Ever downloaded a movie that **only opens in VLC** and won't play on your phone, TV, or the
+normal player on your computer? 😩 Annoying, right?
 
-**Smart Video Converter** is a small, good-looking local web app that fixes exactly that. It
-**probes the file first**, and if the streams are already compatible, it just **rewrites the
-container** — finishing in **seconds for a full-length movie, with zero quality loss**. When a
-real re-encode is needed, it uses your GPU (Intel **Quick Sync**) so even a weak laptop CPU
-isn't the bottleneck.
+**Smart Video Converter** fixes that in a couple of clicks. You pick the video, press one
+button, and you get a clean **`.mp4`** that plays **everywhere** — usually in just a few seconds,
+with **no loss in quality**.
 
-> ⚡ A 1.4 GB / 2.5-hour movie remuxed **MKV → MP4 in ~21 seconds** on an Intel UHD 620 laptop.
+Here's the trick that makes it so fast: most of the time the video inside the file is already
+fine — only its "wrapper" is wrong. So instead of slowly re-recording the whole movie, the app
+just **puts it in the right wrapper** — think of it like moving a DVD into a new case rather than
+re-burning the disc. Same movie, brand-new box, done in seconds. (And when a video *does* need
+real conversion, it quietly uses your computer's graphics chip to speed things up.)
 
-It's built with a **Node.js** front end + orchestration and a **Python + FFmpeg** engine.
+> ⚡ A full **2.5-hour, 1.4 GB movie** converted **in about 21 seconds** on an ordinary laptop.
+
+No technical setup, no uploading huge files to the internet — everything happens **right on your
+own computer**.
+
+---
+
+## 📸 See it in action
+
+Four steps, start to finish — no manual, no guesswork:
+
+<div align="center">
+
+<table>
+<tr>
+<td width="50%" valign="top">
+<img src="assets/screenshots/01-choose.png" width="100%" alt="Choose a video"/>
+<br/><b>1 — Pick your video</b><br/>
+<sub>Browse to any movie already on your computer.</sub>
+</td>
+<td width="50%" valign="top">
+<img src="assets/screenshots/02-options.png" width="100%" alt="Select options"/>
+<br/><b>2 — One click to convert</b><br/>
+<sub>It instantly shows the fastest option — just press <b>Convert</b>.</sub>
+</td>
+</tr>
+<tr>
+<td width="50%" valign="top">
+<img src="assets/screenshots/03-progress.png" width="100%" alt="Live progress"/>
+<br/><b>3 — Watch it fly</b><br/>
+<sub>Live progress — often <b>hundreds of times</b> faster than real-time.</sub>
+</td>
+<td width="50%" valign="top">
+<img src="assets/screenshots/04-done.png" width="100%" alt="Done"/>
+<br/><b>4 — Done — plays anywhere</b><br/>
+<sub>Saved next to the original, ready for any phone, TV, or player.</sub>
+</td>
+</tr>
+</table>
+
+</div>
 
 ---
 
 ## ✨ Features
+
+Everything you need, nothing you don't:
 
 - 🎯 **Smart engine** — automatically picks the cheapest correct operation: instant remux,
   copy-video + re-encode-audio, or a full transcode.
@@ -62,6 +105,8 @@ It's built with a **Node.js** front end + orchestration and a **Python + FFmpeg*
 
 ## 🚀 Why it's fast
 
+In plain terms: it skips the slow work whenever it possibly can. For the curious, here's how —
+
 | Technique | What it does | Impact |
 |---|---|---|
 | **No upload** | Reads the file straight from disk by path | A 1.4 GB file starts **instantly** — no upload wait |
@@ -69,25 +114,6 @@ It's built with a **Node.js** front end + orchestration and a **Python + FFmpeg*
 | **QSV hardware encode** | Offloads encoding to the iGPU when re-encoding is required | The weak CPU is no longer the bottleneck |
 | **Software fallback** | Retries with `libx264`/`libx265` if QSV init fails | Conversion always completes |
 | **Streamed progress** | FFmpeg `-progress` parsed and pushed over WebSocket | Live %, speed & ETA; responsive UI |
-
----
-
-## 📸 Demo
-
-<div align="center">
-
-<!--
-  To add a real demo GIF later:
-  1. Record the app (e.g. ScreenToGif / LICEcap / Kap) while converting a file.
-  2. Save it as assets/demo.gif
-  3. Uncomment the line below.
-  <img src="assets/demo.gif" alt="Smart Video Converter demo" width="80%" />
--->
-
-_Run the app and select a file — the analysis badge shows **⚡ Instant remux** when no
-re-encoding is needed, then the progress bar fills with live speed and ETA._
-
-</div>
 
 ---
 
